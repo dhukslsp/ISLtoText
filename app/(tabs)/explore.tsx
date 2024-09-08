@@ -1,33 +1,34 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { StyleSheet, Image, Platform } from 'react-native';
-
+import { StyleSheet, Image, Platform, TextInput, Button, View, Text } from 'react-native';
+import React from 'react';
 import { Collapsible } from '@/components/Collapsible';
-import { ExternalLink } from '@/components/ExternalLink';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
 
 export default function TabTwoScreen() {
+  const [text, onChangeText] = React.useState('Useless Text');
+  const [number, onChangeNumber] = React.useState('');
+  const onPressLearnMore = () => {
+    console.log("The button got pressed");
+  }
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#D0D0D0', dark: '#353636' }}
-      headerImage={<Ionicons size={310} name="code-slash" style={styles.headerImage} />}>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Translate to ISL</ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+    <View style = {{flex:1}}>
+      <View style={styles.v1}>
+        <Text>djkh</Text>
+      </View>
+      <View style = {styles.v2}>
+        <ThemedText style = {{textAlign:'center',marginTop:20}} type = "defaultSemiBold">Translaion </ThemedText>
+      </View>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  headerImage: {
-    color: '#808080',
-    bottom: -90,
-    left: -35,
-    position: 'absolute',
+  v1:{
+    flex:0.4
   },
-  titleContainer: {
-    flexDirection: 'row',
-    gap: 8,
-  },
+  v2:{
+    flex:0.6,
+    backgroundColor:"D0D0D0"
+  }
 });

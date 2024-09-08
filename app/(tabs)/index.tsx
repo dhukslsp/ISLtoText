@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Platform, Text, Dimensions, StatusBar, View, Button, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Platform, Text, Dimensions, StatusBar, View, Button, TouchableOpacity, TextInput,Pressable } from 'react-native';
 import { useRef, useCallback, useMemo, useState } from 'react';
 import { HelloWave } from '@/components/HelloWave';
 // import { Bottom } from '@/components/AppComponents/Bottomsheet';
@@ -16,6 +16,8 @@ export default function HomeScreen() {
   const bottomSheetRef = useRef<BottomSheet>(null);
   const sheetEndSnap = 600;
   const snapPoints = useMemo(() => [sheetStartSnap, sheetEndSnap], [sheetEndSnap]);
+  const [text, onChangeText] = useState('Useless Text');
+  const [number, onChangeNumber] = useState('');
   const handleSheetChanges = useCallback((index: number) => {
     console.log('handleSheetChanges', index);
   }, []);
@@ -44,25 +46,41 @@ export default function HomeScreen() {
   }
 
   // callbacks
-  
+
   return (
     <>
-    <GestureHandlerRootView style={{ flex: 1 }}>
+      <GestureHandlerRootView style={{ flex: 1 }}>
         <CameraView style={styles.camera} facing={facing}>
-          
+
         </CameraView>
-      
+
         <BottomSheet
           ref={bottomSheetRef}
           onChange={handleSheetChanges}
           snapPoints={snapPoints}
         >
           <BottomSheetView style={styles.contentContainer}>
-            <TouchableOpacity style={styles.button} onPress={toggleCameraFacing}>
-            <TabBarIcon name={ 'camera-reverse'} />
-            </TouchableOpacity>
-            <ThemedText type='defaultSemiBold' >Converted text</ThemedText>
-            <Text style = {{textAlign:"left", paddingTop:20}}>Hello i am ankur i love in South Delhi</Text>
+            <View
+              style={{ flex: 0.2, alignItems: "center" }}
+            >
+              <TouchableOpacity style={{}} onPress={toggleCameraFacing}>
+                <TabBarIcon name={'camera-reverse'} />
+              </TouchableOpacity>
+              <ThemedText type='defaultSemiBold' >Converted text</ThemedText>
+              <Text style={{ textAlign: "left", paddingTop: 20, fontSize: 20 }}>Hello i am ankur i live in South Delhi</Text>
+            </View>
+            <View style={{ flex: .8, flexDirection: "row", alignItems: "flex-start" }}>
+              <TextInput
+                style={styles.input}
+                onChangeText={onChangeNumber}
+                value={number}
+                placeholder="Enter the text to be translated"
+                keyboardType="default"
+              />
+              <Pressable style={styles.button} onPress={()=>{alert("The text has been send")}}>
+                <Text style={{fontSize:20,color:'black'}}>Send text</Text>
+              </Pressable>
+              </View>
           </BottomSheetView>
         </BottomSheet>
       </GestureHandlerRootView>
@@ -71,13 +89,24 @@ export default function HomeScreen() {
 }
 
 const styles = StyleSheet.create({
+  input: {
+    width: "64%",
+    display: "inline",
+    height: 50,
+    borderColor: 'gray',
+    borderWidth: 1,
+    paddingHorizontal: 10,
+    marginTop: 20,
+    marginRight: 10,
+    marginLeft: 20,
+  },
   titleContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 8,
   },
   camera: {
-    flex:1
+    flex: 1
   },
   buttonContainer: {
     flex: 1,
@@ -90,8 +119,11 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   button: {
-    height:40,
-    // backgroundColor:'black'
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 4,
+    marginTop:30
+    
   },
   reactLogo: {
     height: 178,
@@ -111,8 +143,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'grey',
   },
   contentContainer: {
-    flex: 1,
-    alignItems: 'center',
+    flex: 1
   },
   message: {
     textAlign: 'center',
