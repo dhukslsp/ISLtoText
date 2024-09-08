@@ -12,12 +12,12 @@ export default function TabLayout() {
     <Tabs
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        headerShown: false,
       }}>
       <Tabs.Screen
         name="index"
         options={{
           title: 'ISL to text convert',
+          headerShown:false,
           tabBarIcon: ({ color, focused }) => (
             <TabBarIcon name={focused ? 'chatbox' : 'chatbox'} color={color} />
           ),
